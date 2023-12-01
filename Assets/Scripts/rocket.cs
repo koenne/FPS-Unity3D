@@ -7,7 +7,7 @@ using UnityEngine;
 public class rocket : MonoBehaviour
 {
     public GameObject explosion;
-    private float explosionForce = 500, explosionRadius = 5;
+    private float explosionForce = 1000, explosionRadius = 2;
     public Vector3 target;
     public quaternion rotation;
     public AudioClip fireSound;
@@ -16,6 +16,7 @@ public class rocket : MonoBehaviour
     public bool hitPlayer = false;
 
     public GameObject playerMovement;
+    public GameObject enemyAttack;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -32,6 +33,15 @@ public class rocket : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
+        //hitCollider.SendMessage("AddDamage");
+        if (collision.gameObject.CompareTag("rocket"))
+        {
+            AudioSource.PlayClipAtPoint(explosionSound, target);
+            ExplosionDamage(transform.position, explosionRadius);
+            Knockback();
+            Destroy(gameObject);
+
+        }
         AudioSource.PlayClipAtPoint(explosionSound, target);
         GameObject _explosion = Instantiate(explosion, transform.position, transform.rotation);
         ExplosionDamage(transform.position, explosionRadius);
@@ -62,6 +72,12 @@ public class rocket : MonoBehaviour
             if(hitCollider.name == "Player")
             {
                 playerMovement.GetComponent<playerMovement>().ResetGravity();
+            }
+            //hitCollider.SendMessage("AddDamage");
+            if (hitCollider.tag == "enemy")
+            {
+                Debug.Log("Waaaaaaaaa");
+                enemyAttack.GetComponent<enemyAttack>().getHit();
             }
         }
     }

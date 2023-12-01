@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class spawner : MonoBehaviour
 {
-    public Transform enemy;
-    private int enemyMax = 50;
-    // Start is called before the first frame update
+    public GameObject enemy;
+    public int enemyMax = 0;
+    public int gos;
     void Start()
     {
-        for(int i = 0; i < enemyMax; i++)
+    }
+    private void Update()
+    {
+        gos = GameObject.FindGameObjectsWithTag("enemy").Length;
+        if (gos < enemyMax)
         {
-            enemy = Instantiate(enemy, transform.position, Quaternion.identity);
+            GameObject enemyInstance = Instantiate(enemy, transform.position, Quaternion.identity);
         }
     }
-
 }

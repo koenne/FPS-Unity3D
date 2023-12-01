@@ -14,7 +14,7 @@ public class enemyAttack : MonoBehaviour
     public Material defaultMaterial;
     private Renderer rend;
     public bool isClose = false;
-    private int hitCount = 0;
+    public int hitCount = 0;
 
     private void Awake()
     {
@@ -45,14 +45,17 @@ public class enemyAttack : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.collider.tag.Equals("rocket"))
+        if (collision.gameObject.CompareTag("rocket"))
         {
-            Debug.Log("woo");
             hitCount++;
-            if(hitCount == 2)
+            if (hitCount >= 2)
             {
-                Destroy(enemy);
+                Destroy(gameObject);
             }
         }
+    }
+    public void getHit()
+    {
+        hitCount++;
     }
 }

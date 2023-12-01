@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditorInternal;
 using UnityEngine;
 
 public class playerMovement : MonoBehaviour
@@ -17,7 +16,7 @@ public class playerMovement : MonoBehaviour
 
     //Movement variables
     private float movementSpeed = 50f;
-    private float jumpForce = 100;
+    private float jumpForce = 75;
     public float speedUp;
     public float speedUp2 = 0.1f;
 
@@ -38,6 +37,7 @@ public class playerMovement : MonoBehaviour
         //Every frame call out these functions
         Look();
         Jump();
+        Sprint();
         PlayerMovement();
         if (!isGrounded)
         {
@@ -50,6 +50,17 @@ public class playerMovement : MonoBehaviour
             speedUp = 0;
             speedUp2 = 0.1f;
             rb.AddForce(0, speedUp, 0);
+        }
+    }
+    void Sprint()
+    {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            movementSpeed = 100f;
+        }
+        else
+        {
+            movementSpeed = 50f;
         }
     }
     void Jump()
@@ -104,6 +115,10 @@ public class playerMovement : MonoBehaviour
         if (collision.collider.tag == "ground")
         {
             isGrounded = true;
+        }
+        if (collision.gameObject.CompareTag("rocket"))
+        {
+            ResetGravity();
         }
     }
 

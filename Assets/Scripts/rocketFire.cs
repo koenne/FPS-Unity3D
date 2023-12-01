@@ -10,7 +10,6 @@ public class rocketFire : MonoBehaviour
     public Vector3 rocketPos;
     public Vector3 newPosition;
     public quaternion newRotation;
-    public Rigidbody rb;
 
 
     //Time limit
@@ -18,7 +17,6 @@ public class rocketFire : MonoBehaviour
     private float MaxTimeForNextMove = 0.75f;
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
         newPosition = transform.position;
         newRotation = transform.rotation;
     }
@@ -34,7 +32,6 @@ public class rocketFire : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 newPosition = hit.point;
-                newRotation = rb.rotation;
             }
             rocketPos = transform.position;
             Instantiate(objectToSpawn, rocketPos, Quaternion.identity);

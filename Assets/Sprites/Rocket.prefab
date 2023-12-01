@@ -160,3 +160,4 @@ MonoBehaviour:
   explosionSound: {fileID: 8300000, guid: 0997d265670d7d647b22bad84fdaa07f, type: 3}
   hitPlayer: 0
   playerMovement: {fileID: 7981024428716284498, guid: 73cc59b1d2e5e2f489fb65b2d5767504, type: 3}
+  enemyAttack: {fileID: 438869097450460810, guid: 05ae10cb0f5cc5747a8fb97eca992222, type: 3}
