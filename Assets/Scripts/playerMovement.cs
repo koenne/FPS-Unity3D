@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class playerMovement : MonoBehaviour
 {
@@ -23,6 +25,8 @@ public class playerMovement : MonoBehaviour
     //Camera variables
     public float lookSpeed = 3;
     private Vector2 rotation = Vector2.zero;
+    private bool menu = false;
+    public GameObject menuObject;
 
     void Start()
     {
@@ -30,26 +34,40 @@ public class playerMovement : MonoBehaviour
         //Lock the cursor within the game and set the rigibody
         Cursor.lockState = CursorLockMode.Locked;
         rb = GetComponent<Rigidbody>();
+        menuObject.SetActive(false);
     }
 
     void Update()
     {
-        //Every frame call out these functions
-        Look();
-        Jump();
-        Sprint();
-        PlayerMovement();
-        if (!isGrounded)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            speedUp2 += Time.deltaTime * 4;
-            speedUp = speedUp - speedUp2 * Time.deltaTime;
-            rb.AddForce(0, speedUp, 0);
+            Cursor.lockState = CursorLockMode.Locked;
+            menuObject.SetActive(false);
+            menu = !menu;
         }
-        if (isGrounded)
+        if (!menu)
         {
-            speedUp = 0;
-            speedUp2 = 0.1f;
-            rb.AddForce(0, speedUp, 0);
+            Look();
+            Jump();
+            Sprint();
+            PlayerMovement();
+            if (!isGrounded)
+            {
+                speedUp2 += Time.deltaTime * 4;
+                speedUp = speedUp - speedUp2 * Time.deltaTime;
+                rb.AddForce(0, speedUp, 0);
+            }
+            if (isGrounded)
+            {
+                speedUp = 0;
+                speedUp2 = 0.1f;
+                rb.AddForce(0, speedUp, 0);
+            }
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            menuObject.SetActive(true);
         }
     }
     void Sprint()
