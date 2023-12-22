@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Jumping.unity
     guid: da9e123e44bc69149afedc681e31c13a
+  - enabled: 1
+    path: Assets/Scenes/dead.unity
+    guid: 6ec761973ec26724193e6b0d3a663a2c
   m_configObjects: {}

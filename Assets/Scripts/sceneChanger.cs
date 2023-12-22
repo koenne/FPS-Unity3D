@@ -15,6 +15,8 @@ public class sceneChanger : MonoBehaviour
     }
     public void gameOver()
     {
+        Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene(4);
+
     }
 }
