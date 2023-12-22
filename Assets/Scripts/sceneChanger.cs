@@ -13,4 +13,8 @@ public class sceneChanger : MonoBehaviour
     {
         Application.Quit();
     }
+    public void gameOver()
+    {
+        SceneManager.LoadScene(4);
+    }
 }

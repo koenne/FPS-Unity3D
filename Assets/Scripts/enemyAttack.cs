@@ -9,6 +9,7 @@ public class enemyAttack : MonoBehaviour
     private Transform player;
     private float attackRange = 10f;
     private GameObject enemy;
+    private GameObject health;
 
     public Material attackMaterial;
     public Material defaultMaterial;
@@ -25,6 +26,8 @@ public class enemyAttack : MonoBehaviour
     }
     void Start()
     {
+        health = GameObject.Find("Player");
+
     }
 
     // Update is called once per frame
@@ -58,4 +61,11 @@ public class enemyAttack : MonoBehaviour
     {
         hitCount++;
     }
+    void OnCollisionStay(UnityEngine.Collision collision)
+     {
+        if (collision.collider.tag == "player")
+        {
+            health.GetComponent<playerHealth>().getHit();
+        }
+     }
 }
